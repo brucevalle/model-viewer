@@ -310,6 +310,8 @@ Closes opening tag. Content inside model-viewer comes next.
 
 ### Lines 174-197: Hotspots (Interactive Points)
 
+**What are hotspots?** The glowing purple/pink circular buttons you see on the 3D model. When you hover over them, a tooltip appears with information.
+
 ```html
 174  <!-- Hotspots -->
 ```
@@ -318,7 +320,7 @@ Comment.
 ```html
 175  <button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">
 ```
-Interactive point on 3D model. Shows info when you hover.
+Creates a glowing purple button on the 3D model. Shows info tooltip when you hover.
 - `slot="hotspot-1"` = model-viewer special attribute for 3D positioning
 - `data-position="0.5 0.8 0.5"` = XYZ coordinates:
   - `0.5` = 0.5 meters RIGHT from center
@@ -551,10 +553,12 @@ modelViewer.cameraOrbit = '45deg 75deg 105%';
 - `camera-controls` = let user interact
 - `auto-rotate` = spin automatically
 
-**Hotspots:**
+**Hotspots (Purple glowing buttons on model):**
 - `slot="hotspot-X"` = tells model-viewer this is a 3D annotation
 - `data-position="X Y Z"` = 3D coordinates (right/left, up/down, forward/back)
 - `data-normal="X Y Z"` = which direction hotspot faces
+- **Visual:** Purple/pink glowing circle with pulsing animation
+- **Interaction:** Hover to see tooltip with information
 
 **Common HTML:**
 - `id="name"` = unique identifier (JavaScript uses)

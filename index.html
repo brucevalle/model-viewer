@@ -3,85 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Viewer</title>
+    <meta name="description" content="Professional 3D Model Viewer with Interactive Features">
+    <title>3D Model Viewer | Interactive Experience</title>
 
-    <!-- Model Viewer Library -->
+    <!-- Model Viewer Web Component -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css?v=7">
+    <!-- Google Fonts - Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">3D Model Viewer</div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- 3D Model Viewer -->
-        <model-viewer
-            id="viewer"
-            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-            alt="3D Astronaut Model"
-            camera-controls
-            auto-rotate
-            ar
-            camera-orbit="45deg 75deg 105%"
-            min-camera-orbit="auto auto 50%"
-            max-camera-orbit="auto auto 300%"
-        >
-            <!-- Hotspot 1: Visor -->
-            <button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">
-                <div class="hotspot-annotation">
-                    <h4>Visor</h4>
-                    <p>Gold-coated visor protects against solar radiation</p>
-                </div>
-            </button>
-
-            <!-- Hotspot 2: Communication -->
-            <button class="hotspot" slot="hotspot-2" data-position="-0.3 0.4 0.6" data-normal="-1 0 0">
-                <div class="hotspot-annotation">
-                    <h4>Communication System</h4>
-                    <p>Built-in microphone and speakers</p>
-                </div>
-            </button>
-
-            <!-- Hotspot 3: Life Support -->
-            <button class="hotspot" slot="hotspot-3" data-position="0 0.2 0.8" data-normal="0 0 1">
-                <div class="hotspot-annotation">
-                    <h4>Life Support Connection</h4>
-                    <p>Connects to portable life support system</p>
-                </div>
-            </button>
-        </model-viewer>
-
-        <!-- Controls -->
-        <div class="controls">
-            <div class="control-group">
-                <label>Environment</label>
-                <select id="environment">
-                    <option value="neutral">Neutral</option>
-                    <option value="legacy">Studio</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label>Exposure: <span id="exposureValue">1</span></label>
-                <input type="range" id="exposure" min="0" max="2" step="0.1" value="1">
-            </div>
-
-            <div class="control-group">
-                <label>Shadow: <span id="shadowValue">1</span></label>
-                <input type="range" id="shadow" min="0" max="2" step="0.1" value="1">
-            </div>
-
-            <button onclick="resetCamera()">Reset Camera</button>
-            <button onclick="toggleAR()">View in AR</button>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading 3D Model...</p>
         </div>
     </div>
 
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <button class="logo" id="homeLogo" aria-label="Return to home">
+                <span class="logo-icon">3D</span>
+                <span class="logo-text">Model Viewer</span>
+            </button>
+            <div class="nav-links">
+                <button class="nav-btn active" data-section="viewer">Viewer</button>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.657 4.343L14.243 5.757M5.757 14.243L4.343 15.657M15.657 15.657L14.243 14.243M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Model Viewer Section -->
+        <section class="viewer-section active" id="viewerSection">
+            <div class="viewer-container">
+                <!-- Model Information Panel -->
+                <aside class="info-panel">
+                    <div class="info-content">
+                        <h1 class="model-title">Astronaut Helmet</h1>
+                        <p class="model-subtitle">NASA Apollo 11 Mission</p>
+
+                        <div class="model-description">
+                            <p>Experience a highly detailed 3D reconstruction of the iconic Apollo 11 astronaut helmet. Interact with the model, explore its features, and discover the technology that made history.</p>
+                        </div>
+
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-value">1969</span>
+                                <span class="stat-label">Year</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">12K</span>
+                                <span class="stat-label">Polygons</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">PBR</span>
+                                <span class="stat-label">Materials</span>
+                            </div>
+                        </div>
+
+                        <!-- Customization Controls -->
+                        <div class="controls-section">
+                            <h3 class="controls-title">Customize View</h3>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    <span>Environment</span>
+                                    <select id="environmentSelector" class="control-select">
+                                        <option value="neutral">Neutral</option>
+                                        <option value="studio">Studio</option>
+                                        <option value="warehouse">Warehouse</option>
+                                        <option value="outdoor">Outdoor</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    <span>Exposure</span>
+                                    <input type="range" id="exposureSlider" class="control-slider" min="0" max="2" step="0.1" value="1">
+                                </label>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    <span>Shadow Intensity</span>
+                                    <input type="range" id="shadowSlider" class="control-slider" min="0" max="2" step="0.1" value="1">
+                                </label>
+                            </div>
+
+                            <div class="control-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="autoRotateToggle" checked>
+                                    <span class="checkbox-custom"></span>
+                                    <span>Auto Rotate</span>
+                                </label>
+                            </div>
+
+                            <div class="control-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="wireframeToggle">
+                                    <span class="checkbox-custom"></span>
+                                    <span>Wireframe Mode</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="arButton">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 3L2 7L10 11L18 7L10 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 13L10 17L18 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 10L10 14L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                View in AR
+                            </button>
+                            <button class="btn btn-secondary" id="resetCamera">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M10 6L6 2L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Reset View
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 3D Model Viewer -->
+                <div class="model-viewer-wrapper">
+                    <model-viewer
+                        id="modelViewer"
+                        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                        alt="A 3D model of an astronaut helmet"
+                        shadow-intensity="1"
+                        camera-controls
+                        auto-rotate
+                        ar
+                        ar-modes="webxr scene-viewer quick-look"
+                        environment-image="neutral"
+                        exposure="1"
+                        tone-mapping="commerce"
+                        camera-orbit="45deg 75deg 105%"
+                        min-camera-orbit="auto auto 50%"
+                        max-camera-orbit="auto auto 300%"
+                        camera-target="auto auto auto"
+                        field-of-view="35deg"
+                        interaction-prompt="auto"
+                        loading="eager"
+                    >
+                        <!-- Hotspots -->
+                        <button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">
+                            <div class="hotspot-annotation">
+                                <div class="hotspot-content">
+                                    <h4>Visor</h4>
+                                    <p>Gold-coated visor protects against solar radiation</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="hotspot" slot="hotspot-2" data-position="-0.3 0.4 0.6" data-normal="-1 0 0">
+                            <div class="hotspot-annotation">
+                                <div class="hotspot-content">
+                                    <h4>Communication System</h4>
+                                    <p>Built-in microphone and speakers for mission communication</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="hotspot" slot="hotspot-3" data-position="0 0.2 0.8" data-normal="0 0 1">
+                            <div class="hotspot-annotation">
+                                <div class="hotspot-content">
+                                    <h4>Life Support Connection</h4>
+                                    <p>Connects to portable life support system</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <!-- Loading Progress Bar -->
+                        <div class="progress-bar" slot="progress-bar">
+                            <div class="update-bar"></div>
+                        </div>
+
+                        <!-- AR Prompt -->
+                        <div id="ar-prompt" slot="ar-button">
+                            <div class="ar-prompt-content">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 5L4 9L12 13L20 9L12 5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4 15L12 19L20 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4 12L12 16L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>View in your space</span>
+                            </div>
+                        </div>
+                    </model-viewer>
+
+                    <!-- Viewer Controls Overlay -->
+                    <div class="viewer-controls">
+                        <button class="control-btn" id="fullscreenBtn" aria-label="Toggle fullscreen">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M3 7V3H7M13 3H17V7M17 13V17H13M7 17H3V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="screenshotBtn" aria-label="Take screenshot">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <rect x="2" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="10" cy="11" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M6 5L7.5 3H12.5L14 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 3D Model Viewer. Built with modern web technologies.</p>
+        </div>
+    </footer>
+
     <!-- JavaScript -->
-    <script src="js/main.js?v=7"></script>
+    <script src="js/main.js?v=6"></script>
 </body>
 </html>

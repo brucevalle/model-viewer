@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CACHE TEST - Should see Version 4</title>
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 50px;
+            font-size: 20px;
+        }
+        .status { color: #ff0; }
+        button {
+            background: #0f0;
+            color: #000;
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        button:hover {
+            background: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 CACHE TEST PAGE</h1>
+    <p class="status">If you see this, your browser IS loading new files!</p>
+
+    <h2>Test Results:</h2>
+    <p id="jsVersion">❌ JavaScript NOT loaded</p>
+    <p id="buttonTest">❌ Button NOT found</p>
+
+    <button id="testBtn">Click Me to Test JavaScript</button>
+    <p id="clickResult"></p>
+
+    <hr>
+    <h3>Go back to main site:</h3>
+    <a href="/" style="color: #0ff; font-size: 24px;">← Back to 3D Model Viewer</a>
+
+    <script>
+        console.log('🚀 TEST PAGE: JavaScript is loading!');
+        document.getElementById('jsVersion').textContent = '✅ JavaScript IS loaded - Version 4';
+        document.getElementById('jsVersion').style.color = '#0f0';
+
+        const btn = document.getElementById('testBtn');
+        if (btn) {
+            document.getElementById('buttonTest').textContent = '✅ Button FOUND';
+            document.getElementById('buttonTest').style.color = '#0f0';
+
+            btn.addEventListener('click', function() {
+                document.getElementById('clickResult').textContent = '✅ CLICK WORKS! JavaScript is functioning correctly!';
+                document.getElementById('clickResult').style.color = '#0f0';
+                document.getElementById('clickResult').style.fontSize = '24px';
+                console.log('✅ Button click working!');
+            });
+        }
+    </script>
+</body>
+</html>

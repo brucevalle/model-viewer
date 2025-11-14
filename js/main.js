@@ -506,19 +506,23 @@ function loadSatelliteModel(satellite, elements) {
     modelViewer.src = satellite.file;
     modelViewer.alt = `3D model of ${satellite.name}`;
 
-    // Adjust camera for better view of satellites
-    modelViewer.cameraOrbit = '45deg 75deg 5m';
-    modelViewer.minCameraOrbit = 'auto auto 2m';
-    modelViewer.maxCameraOrbit = 'auto auto 20m';
-    modelViewer.fieldOfView = '30deg';
+    // Set better initial camera position for satellites
+    modelViewer.cameraOrbit = '45deg 75deg 105%';
+    modelViewer.minCameraOrbit = 'auto auto 50%';
+    modelViewer.maxCameraOrbit = 'auto auto 300%';
+    modelViewer.fieldOfView = '35deg';
+    modelViewer.cameraTarget = 'auto auto auto';
 
-    // Reset camera when model loads
+    // When model loads, frame it properly
     modelViewer.addEventListener('load', function resetCameraOnLoad() {
-        // Auto-frame the model nicely
-        modelViewer.fieldOfView = '30deg';
+        // Let model-viewer auto-frame the model first
+        modelViewer.resetTurntableRotation();
 
-        // Remove this listener after first load
-        modelViewer.removeEventListener('load', resetCameraOnLoad);
+        // Set camera to show full model with good spacing
+        modelViewer.cameraOrbit = '45deg 75deg 105%';
+        modelViewer.fieldOfView = '35deg';
+
+        console.log(`Loaded ${satellite.name} - camera auto-framed`);
     }, { once: true });
 
     // Update info panel with satellite data

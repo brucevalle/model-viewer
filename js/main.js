@@ -364,15 +364,61 @@ function resetToHomeModel(modelViewer, elements) {
         loadingScreen.classList.remove('hidden');
     }
 
+    // Remove satellite hotspots first
+    const oldHotspots = modelViewer.querySelectorAll('.hotspot');
+    oldHotspots.forEach(hotspot => hotspot.remove());
+
     // Reset to astronaut demo model
     modelViewer.src = 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
     modelViewer.alt = 'A 3D model of an astronaut helmet';
 
-    // Reset camera settings
-    modelViewer.cameraOrbit = '45deg 75deg 5m';
-    modelViewer.minCameraOrbit = 'auto auto 2m';
-    modelViewer.maxCameraOrbit = 'auto auto 20m';
-    modelViewer.fieldOfView = '30deg';
+    // Reset camera settings (use percentage-based like satellites)
+    modelViewer.cameraOrbit = '45deg 75deg 105%';
+    modelViewer.minCameraOrbit = 'auto auto 50%';
+    modelViewer.maxCameraOrbit = 'auto auto 300%';
+    modelViewer.fieldOfView = '35deg';
+
+    // Restore astronaut hotspots after model loads
+    modelViewer.addEventListener('load', function restoreHotspots() {
+        // Re-add the three astronaut hotspots
+        const hotspotsHTML = `
+            <button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">
+                <div class="hotspot-annotation">
+                    <div class="hotspot-content">
+                        <h4>Visor</h4>
+                        <p>Gold-coated visor protects against solar radiation</p>
+                    </div>
+                </div>
+            </button>
+            <button class="hotspot" slot="hotspot-2" data-position="-0.3 0.4 0.6" data-normal="-1 0 0">
+                <div class="hotspot-annotation">
+                    <div class="hotspot-content">
+                        <h4>Communication System</h4>
+                        <p>Built-in microphone and speakers for mission communication</p>
+                    </div>
+                </div>
+            </button>
+            <button class="hotspot" slot="hotspot-3" data-position="0 0.2 0.8" data-normal="0 0 1">
+                <div class="hotspot-annotation">
+                    <div class="hotspot-content">
+                        <h4>Life Support Connection</h4>
+                        <p>Connects to portable life support system</p>
+                    </div>
+                </div>
+            </button>
+        `;
+
+        // Create temp div to parse HTML
+        const temp = document.createElement('div');
+        temp.innerHTML = hotspotsHTML;
+
+        // Add each hotspot to model-viewer
+        Array.from(temp.children).forEach(hotspot => {
+            modelViewer.appendChild(hotspot);
+        });
+
+        console.log('Astronaut hotspots restored');
+    }, { once: true });
 
     // Reset info panel to original
     const titleElement = document.querySelector('.model-title');
@@ -501,6 +547,10 @@ function loadSatelliteModel(satellite, elements) {
         loadingScreen.style.display = 'flex';
         loadingScreen.classList.remove('hidden');
     }
+
+    // Remove old hotspots (they're hardcoded for astronaut helmet only)
+    const oldHotspots = modelViewer.querySelectorAll('.hotspot');
+    oldHotspots.forEach(hotspot => hotspot.remove());
 
     // Update model source
     modelViewer.src = satellite.file;

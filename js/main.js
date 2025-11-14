@@ -4,6 +4,167 @@
  */
 
 // ========================================
+// NASA SATELLITE DATABASE
+// ========================================
+
+/**
+ * Database of all NASA satellite models with metadata
+ * Each satellite includes name, type, description, and GLB file path
+ */
+const SATELLITE_DATABASE = [
+    {
+        id: 'chandra',
+        name: 'Chandra X-ray Observatory',
+        type: 'Space Telescope',
+        icon: '🔭',
+        year: '1999',
+        description: 'NASA\'s flagship X-ray telescope, observing high-energy regions of the universe including black holes, supernovae, and galaxy clusters.',
+        file: 'assets/glb/Chandra X-ray Observatory.glb',
+        tags: ['X-Ray', 'Observatory', 'Deep Space']
+    },
+    {
+        id: 'clementine',
+        name: 'Clementine',
+        type: 'Lunar Orbiter',
+        icon: '🌙',
+        year: '1994',
+        description: 'Joint space project between NASA and the Department of Defense to test sensors and spacecraft components in the harsh environment of space.',
+        file: 'assets/glb/Clementine.glb',
+        tags: ['Lunar', 'Orbiter', 'Mapping']
+    },
+    {
+        id: 'calipso',
+        name: 'CALIPSO',
+        type: 'Earth Observation',
+        icon: '🛰️',
+        year: '2006',
+        description: 'Cloud-Aerosol Lidar and Infrared Pathfinder Satellite. Studies clouds and aerosols in Earth\'s atmosphere using advanced lidar technology.',
+        file: 'assets/glb/Cloud-Aerosol Lidar and Infrared Pathfinder Satellite (CALIPSO).glb',
+        tags: ['Earth Science', 'Lidar', 'Atmosphere']
+    },
+    {
+        id: 'cloudsat-a',
+        name: 'CloudSat (Configuration A)',
+        type: 'Earth Observation',
+        icon: '☁️',
+        year: '2006',
+        description: 'NASA satellite using radar to study clouds and precipitation from space, providing crucial data for climate research.',
+        file: 'assets/glb/CloudSat (A).glb',
+        tags: ['Weather', 'Radar', 'Climate']
+    },
+    {
+        id: 'cloudsat-b',
+        name: 'CloudSat (Configuration B)',
+        type: 'Earth Observation',
+        icon: '☁️',
+        year: '2006',
+        description: 'Alternative configuration of CloudSat radar satellite for comprehensive cloud and precipitation monitoring.',
+        file: 'assets/glb/CloudSat (B).glb',
+        tags: ['Weather', 'Radar', 'Climate']
+    },
+    {
+        id: 'cloudsat-c',
+        name: 'CloudSat (Configuration C)',
+        type: 'Earth Observation',
+        icon: '☁️',
+        year: '2006',
+        description: 'Third configuration variant of the CloudSat mission for advanced atmospheric research.',
+        file: 'assets/glb/CloudSat (C).glb',
+        tags: ['Weather', 'Radar', 'Climate']
+    },
+    {
+        id: 'desdyni',
+        name: 'DESDynI',
+        type: 'Earth Science',
+        icon: '🌍',
+        year: 'Planned',
+        description: 'Deformation, Ecosystem Structure, and Dynamics of Ice. Mission to study Earth\'s changing ecosystems, ice masses, and solid Earth.',
+        file: 'assets/glb/Deformation, Ecosystem Structure, and Dynamics of Ice (DESDynI).glb',
+        tags: ['Earth Science', 'Radar', 'Climate']
+    },
+    {
+        id: 'gro',
+        name: 'Gamma Ray Observatory',
+        type: 'Space Telescope',
+        icon: '⚡',
+        year: '1991',
+        description: 'Compton Gamma Ray Observatory (CGRO) was a space observatory detecting gamma rays from violent cosmic events.',
+        file: 'assets/glb/Gamma Ray Observatory.glb',
+        tags: ['Gamma Ray', 'Observatory', 'Astrophysics']
+    },
+    {
+        id: 'habitat',
+        name: 'Habitat Demonstration Unit',
+        type: 'Space Habitat',
+        icon: '🏠',
+        year: 'Development',
+        description: 'Prototype habitat module demonstrating technologies for long-duration space missions and potential Mars habitation.',
+        file: 'assets/glb/Habitat Demonstration Unit (part 1).glb',
+        tags: ['Habitat', 'Mars', 'Human Spaceflight']
+    },
+    {
+        id: 'icesat-a',
+        name: 'ICESat (Configuration A)',
+        type: 'Earth Observation',
+        icon: '❄️',
+        year: '2003',
+        description: 'Ice, Cloud, and land Elevation Satellite measuring ice sheet mass balance, cloud heights, and land topography using laser altimetry.',
+        file: 'assets/glb/Ice, Clouds, and Land Elevation Satellite (ICESat) (A).glb',
+        tags: ['Ice', 'Laser', 'Climate']
+    },
+    {
+        id: 'icesat-b',
+        name: 'ICESat (Configuration B)',
+        type: 'Earth Observation',
+        icon: '❄️',
+        year: '2003',
+        description: 'Alternative configuration of ICESat for precision ice elevation measurements and climate monitoring.',
+        file: 'assets/glb/Ice, Clouds, and Land Elevation Satellite (ICESat) (B).glb',
+        tags: ['Ice', 'Laser', 'Climate']
+    },
+    {
+        id: 'icesat2-a',
+        name: 'ICESat-2 (Configuration A)',
+        type: 'Earth Observation',
+        icon: '❄️',
+        year: '2018',
+        description: 'Advanced successor to ICESat using photon-counting lidar to measure ice height changes with unprecedented precision.',
+        file: 'assets/glb/Ice, Clouds, and Land Elevation Satellite-2 (ICESat-2) (A).glb',
+        tags: ['Ice', 'Lidar', 'Climate']
+    },
+    {
+        id: 'icesat2-b',
+        name: 'ICESat-2 (Configuration B)',
+        type: 'Earth Observation',
+        icon: '❄️',
+        year: '2018',
+        description: 'Alternative configuration of ICESat-2 for enhanced polar ice sheet monitoring and sea ice thickness measurements.',
+        file: 'assets/glb/Ice, Clouds, and Land Elevation Satellite-2 (ICESat-2) (B).glb',
+        tags: ['Ice', 'Lidar', 'Climate']
+    },
+    {
+        id: 'insight',
+        name: 'InSight Lander',
+        type: 'Mars Lander',
+        icon: '🔴',
+        year: '2018',
+        description: 'Interior Exploration using Seismic Investigations, Geodesy and Heat Transport. Mars lander studying the planet\'s deep interior.',
+        file: 'assets/glb/InSight Cruise Lander (arm deployed).glb',
+        tags: ['Mars', 'Seismic', 'Geology']
+    },
+    {
+        id: 'ingenuity',
+        name: 'Ingenuity Mars Helicopter',
+        type: 'Mars Helicopter',
+        icon: '🚁',
+        year: '2021',
+        description: 'First aircraft to achieve powered, controlled flight on another planet. Technology demonstrator that exceeded all expectations.',
+        file: 'assets/glb/Ingenuity Mars Helicopter.glb',
+        tags: ['Mars', 'Helicopter', 'Innovation']
+    }
+];
+
+// ========================================
 // INITIALIZATION
 // ========================================
 
@@ -22,6 +183,7 @@ function initializeApp() {
     // Initialize components
     initializeTheme(elements);
     initializeNavigation(elements);
+    initializeSatelliteCollection(elements);
     initializeModelViewer(elements);
     initializeControls(elements);
     initializeLoadingScreen(elements);
@@ -43,9 +205,13 @@ function getElements() {
         navButtons: document.querySelectorAll('.nav-btn'),
         sections: {
             viewer: document.getElementById('viewerSection'),
+            collection: document.getElementById('collectionSection'),
             features: document.getElementById('featuresSection'),
             about: document.getElementById('aboutSection')
         },
+
+        // Collection
+        satelliteGrid: document.getElementById('satelliteGrid'),
 
         // Model Viewer
         modelViewer: document.getElementById('modelViewer'),
@@ -142,6 +308,152 @@ function navigateToSection(sectionName, elements) {
             section.classList.remove('active');
         }
     });
+}
+
+// ========================================
+// SATELLITE COLLECTION
+// ========================================
+
+/**
+ * Initialize the satellite collection gallery
+ * @param {Object} elements - DOM elements object
+ */
+function initializeSatelliteCollection(elements) {
+    const { satelliteGrid } = elements;
+
+    if (!satelliteGrid) {
+        console.warn('Satellite grid element not found');
+        return;
+    }
+
+    // Clear existing content
+    satelliteGrid.innerHTML = '';
+
+    // Generate satellite cards for each model in database
+    SATELLITE_DATABASE.forEach(satellite => {
+        const card = createSatelliteCard(satellite);
+        satelliteGrid.appendChild(card);
+
+        // Add click event to load satellite in viewer
+        card.addEventListener('click', () => {
+            loadSatelliteModel(satellite, elements);
+        });
+    });
+
+    console.log(`Loaded ${SATELLITE_DATABASE.length} NASA satellite models`);
+}
+
+/**
+ * Create a satellite card element
+ * @param {Object} satellite - Satellite data object
+ * @returns {HTMLElement} Satellite card element
+ */
+function createSatelliteCard(satellite) {
+    const card = document.createElement('div');
+    card.className = 'satellite-card';
+    card.setAttribute('data-satellite-id', satellite.id);
+
+    card.innerHTML = `
+        <div class="satellite-thumbnail">
+            <div class="satellite-icon">${satellite.icon}</div>
+            <div class="satellite-overlay">
+                <div class="satellite-overlay-content">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    View in 3D
+                </div>
+            </div>
+        </div>
+        <div class="satellite-info">
+            <h3 class="satellite-name">${satellite.name}</h3>
+            <div class="satellite-type">${satellite.type}</div>
+            <p class="satellite-description">${satellite.description}</p>
+            <div class="satellite-meta">
+                <span class="meta-tag">📅 ${satellite.year}</span>
+                ${satellite.tags.map(tag => `<span class="meta-tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+/**
+ * Load a satellite model into the 3D viewer
+ * @param {Object} satellite - Satellite data object
+ * @param {Object} elements - DOM elements object
+ */
+function loadSatelliteModel(satellite, elements) {
+    const { modelViewer } = elements;
+
+    // Show loading screen
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        loadingScreen.style.display = 'flex';
+        loadingScreen.classList.remove('hidden');
+    }
+
+    // Update model source
+    modelViewer.src = satellite.file;
+    modelViewer.alt = `3D model of ${satellite.name}`;
+
+    // Update info panel with satellite data
+    updateViewerInfo(satellite);
+
+    // Switch to viewer section
+    navigateToSection('viewer', elements);
+
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Show success message
+    setTimeout(() => {
+        showSuccessMessage(`Loading ${satellite.name}...`);
+    }, 300);
+}
+
+/**
+ * Update the viewer info panel with satellite information
+ * @param {Object} satellite - Satellite data object
+ */
+function updateViewerInfo(satellite) {
+    // Update title
+    const titleElement = document.querySelector('.model-title');
+    if (titleElement) {
+        titleElement.textContent = satellite.name;
+    }
+
+    // Update subtitle
+    const subtitleElement = document.querySelector('.model-subtitle');
+    if (subtitleElement) {
+        subtitleElement.textContent = satellite.type;
+    }
+
+    // Update description
+    const descriptionElement = document.querySelector('.model-description p');
+    if (descriptionElement) {
+        descriptionElement.textContent = satellite.description;
+    }
+
+    // Update stats
+    const statValues = document.querySelectorAll('.stat-value');
+    const statLabels = document.querySelectorAll('.stat-label');
+
+    if (statValues.length >= 3 && statLabels.length >= 3) {
+        // Year
+        statValues[0].textContent = satellite.year;
+        statLabels[0].textContent = 'Launch Year';
+
+        // Type
+        statValues[1].textContent = satellite.type.split(' ')[0];
+        statLabels[1].textContent = 'Type';
+
+        // Tags count
+        statValues[2].textContent = satellite.tags.length;
+        statLabels[2].textContent = 'Features';
+    }
 }
 
 // ========================================

@@ -209,6 +209,21 @@ body {
     font-weight: 700;
     font-size: var(--font-size-lg);
     color: var(--color-text-primary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.logo:hover {
+    background: var(--color-bg-tertiary);
+    transform: scale(1.02);
+}
+
+.logo:active {
+    transform: scale(0.98);
 }
 
 .logo-icon {

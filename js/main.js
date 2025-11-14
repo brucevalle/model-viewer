@@ -183,6 +183,7 @@ function initializeApp() {
     // Initialize components
     initializeTheme(elements);
     initializeNavigation(elements);
+    initializeHomeButton(elements);
     initializeSatelliteCollection(elements);
     initializeModelViewer(elements);
     initializeControls(elements);
@@ -212,6 +213,9 @@ function getElements() {
 
         // Collection
         satelliteGrid: document.getElementById('satelliteGrid'),
+
+        // Home
+        homeLogo: document.getElementById('homeLogo'),
 
         // Model Viewer
         modelViewer: document.getElementById('modelViewer'),
@@ -308,6 +312,93 @@ function navigateToSection(sectionName, elements) {
             section.classList.remove('active');
         }
     });
+}
+
+// ========================================
+// HOME BUTTON
+// ========================================
+
+/**
+ * Initialize home button to reset to demo model
+ * @param {Object} elements - DOM elements object
+ */
+function initializeHomeButton(elements) {
+    const { homeLogo, modelViewer } = elements;
+
+    if (!homeLogo) {
+        console.warn('Home logo button not found');
+        return;
+    }
+
+    homeLogo.addEventListener('click', () => {
+        resetToHomeModel(modelViewer, elements);
+    });
+}
+
+/**
+ * Reset viewer to the home/demo astronaut model
+ * @param {HTMLElement} modelViewer - The model-viewer element
+ * @param {Object} elements - DOM elements object
+ */
+function resetToHomeModel(modelViewer, elements) {
+    // Show loading screen
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        loadingScreen.style.display = 'flex';
+        loadingScreen.classList.remove('hidden');
+    }
+
+    // Reset to astronaut demo model
+    modelViewer.src = 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
+    modelViewer.alt = 'A 3D model of an astronaut helmet';
+
+    // Reset camera settings
+    modelViewer.cameraOrbit = '45deg 75deg 5m';
+    modelViewer.minCameraOrbit = 'auto auto 2m';
+    modelViewer.maxCameraOrbit = 'auto auto 20m';
+    modelViewer.fieldOfView = '30deg';
+
+    // Reset info panel to original
+    const titleElement = document.querySelector('.model-title');
+    if (titleElement) {
+        titleElement.textContent = 'Astronaut Helmet';
+    }
+
+    const subtitleElement = document.querySelector('.model-subtitle');
+    if (subtitleElement) {
+        subtitleElement.textContent = 'NASA Apollo 11 Mission';
+    }
+
+    const descriptionElement = document.querySelector('.model-description p');
+    if (descriptionElement) {
+        descriptionElement.textContent = 'Experience a highly detailed 3D reconstruction of the iconic Apollo 11 astronaut helmet. Interact with the model, explore its features, and discover the technology that made history.';
+    }
+
+    // Reset stats
+    const statValues = document.querySelectorAll('.stat-value');
+    const statLabels = document.querySelectorAll('.stat-label');
+
+    if (statValues.length >= 3 && statLabels.length >= 3) {
+        statValues[0].textContent = '1969';
+        statLabels[0].textContent = 'Year';
+
+        statValues[1].textContent = '12K';
+        statLabels[1].textContent = 'Polygons';
+
+        statValues[2].textContent = 'PBR';
+        statLabels[2].textContent = 'Materials';
+    }
+
+    // Switch to viewer section
+    navigateToSection('viewer', elements);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Show success message
+    setTimeout(() => {
+        showSuccessMessage('Welcome back to the demo!');
+    }, 300);
 }
 
 // ========================================

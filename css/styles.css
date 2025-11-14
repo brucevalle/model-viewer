@@ -189,6 +189,7 @@ body {
     -webkit-backdrop-filter: blur(var(--blur-md));
     border-bottom: 1px solid var(--color-border);
     transition: all var(--transition-base);
+    pointer-events: auto;
 }
 
 .nav-container {
@@ -215,6 +216,9 @@ body {
     transition: all var(--transition-fast);
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
+    pointer-events: auto;
+    z-index: 1001;
+    position: relative;
 }
 
 .logo:hover {

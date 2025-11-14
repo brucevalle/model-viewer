@@ -325,14 +325,27 @@ function navigateToSection(sectionName, elements) {
 function initializeHomeButton(elements) {
     const { homeLogo, modelViewer } = elements;
 
+    console.log('Initializing home button...', homeLogo);
+
     if (!homeLogo) {
-        console.warn('Home logo button not found');
+        console.error('Home logo button not found! Check HTML for id="homeLogo"');
         return;
     }
 
+    console.log('Home button found! Adding click listener...');
+
     homeLogo.addEventListener('click', () => {
+        console.log('Home logo clicked!');
         resetToHomeModel(modelViewer, elements);
     });
+
+    // Test click handler
+    homeLogo.style.outline = '2px solid red';
+    setTimeout(() => {
+        homeLogo.style.outline = '';
+    }, 2000);
+
+    console.log('Home button initialized successfully!');
 }
 
 /**

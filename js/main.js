@@ -399,6 +399,21 @@ function loadSatelliteModel(satellite, elements) {
     modelViewer.src = satellite.file;
     modelViewer.alt = `3D model of ${satellite.name}`;
 
+    // Adjust camera for better view of satellites
+    modelViewer.cameraOrbit = '45deg 75deg 5m';
+    modelViewer.minCameraOrbit = 'auto auto 2m';
+    modelViewer.maxCameraOrbit = 'auto auto 20m';
+    modelViewer.fieldOfView = '30deg';
+
+    // Reset camera when model loads
+    modelViewer.addEventListener('load', function resetCameraOnLoad() {
+        // Auto-frame the model nicely
+        modelViewer.fieldOfView = '30deg';
+
+        // Remove this listener after first load
+        modelViewer.removeEventListener('load', resetCameraOnLoad);
+    }, { once: true });
+
     // Update info panel with satellite data
     updateViewerInfo(satellite);
 

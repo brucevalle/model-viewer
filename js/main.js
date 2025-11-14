@@ -168,7 +168,10 @@ const SATELLITE_DATABASE = [
 // INITIALIZATION
 // ========================================
 
+console.log('🚀 main.js loaded! Version 3');
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🎯 DOMContentLoaded fired!');
     initializeApp();
 });
 

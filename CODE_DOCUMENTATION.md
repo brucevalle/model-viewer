@@ -1,450 +1,568 @@
-# Code Documentation - NASA 3D Model Viewer
+# Code Documentation - Line by Line
 
-**Quick Guide:** This explains every line of code so you understand what you built.
+**Purpose:** Understand every line of code in your NASA 3D Model Viewer project.
 
 ---
 
-## index.html - Line by Line
+## index.html
 
-### Lines 1-10: Document Setup
+### Document Setup
 
-```html
-1  <!DOCTYPE html>
-```
-Tells browser this is modern HTML5. Required first line.
+**Line 1:** `<!DOCTYPE html>`
+Declares HTML5 document type. Required first line.
 
-```html
-2  <html lang="en">
-```
-Starts HTML document. `lang="en"` = content is in English.
+**Line 2:** `<html lang="en">`
+Opens HTML document, sets language to English.
 
-```html
-3  <head>
-```
-Container for page information (not visible on page).
+**Line 3:** `<head>`
+Opens head section (metadata, not visible on page).
 
-```html
-4  <meta charset="UTF-8">
-```
-Allows all characters/emojis to display correctly.
+**Line 4:** `<meta charset="UTF-8">`
+Sets character encoding to UTF-8 (supports all characters/emojis).
 
-```html
-5  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-```
-Makes site work on mobile. Page width = device width, no zoom.
+**Line 5:** `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+Makes site responsive on mobile devices. Width matches device width, no initial zoom.
 
-```html
-6  <meta name="description" content="Professional 3D Model Viewer with Interactive Features">
-```
-Description for search engines (SEO). Shows in Google results.
+**Line 6:** `<meta name="description" content="Professional 3D Model Viewer with Interactive Features">`
+Description for search engines (appears in Google search results).
 
-```html
-7  <title>3D Model Viewer | Interactive Experience</title>
-```
+**Line 7:** `<title>3D Model Viewer | Interactive Experience</title>`
 Text shown in browser tab.
 
-```html
-8-9  (blank lines)
-```
-Empty lines for readability.
+**Line 10:** `<!-- Model Viewer Web Component -->`
+HTML comment (not visible to users). Explains next section.
 
-```html
-10  <!-- Model Viewer Web Component -->
-```
-Comment explaining next line. Not visible to users.
+**Line 11:** `<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>`
+Loads Google's model-viewer library. Provides `<model-viewer>` element. `type="module"` means modern JavaScript.
 
----
+**Line 13:** `<!-- Google Fonts - Professional Typography -->`
+Comment explaining fonts section.
 
-### Lines 11-20: Loading Libraries
+**Line 14:** `<link rel="preconnect" href="https://fonts.googleapis.com">`
+**Line 15:** `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`
+Pre-connects to Google Fonts servers for faster font loading.
 
-```html
-11  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-```
-Loads Google's 3D model viewer library. This gives us the `<model-viewer>` element.
-- `type="module"` = modern JavaScript
-- `src="..."` = where to get the library
-- This handles all 3D rendering for us
+**Line 16:** `<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">`
+Loads two fonts: **Inter** (body text) and **Space Grotesk** (headings) with multiple weights.
 
-```html
-12  (blank)
-13  <!-- Google Fonts - Professional Typography -->
-```
-Comment explaining fonts coming next.
+**Line 18:** `<!-- Styles -->`
+Comment for CSS link.
 
-```html
-14  <link rel="preconnect" href="https://fonts.googleapis.com">
-15  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-```
-Speeds up font loading by connecting early to Google Fonts servers.
+**Line 19:** `<link rel="stylesheet" href="css/styles.css?v=6">`
+Links CSS file. `?v=6` forces browser to reload latest version (cache busting).
 
-```html
-16  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-```
-Loads two fonts:
-- **Inter** for body text (5 different weights)
-- **Space Grotesk** for headings (4 weights)
-
-```html
-17  (blank)
-18  <!-- Styles -->
-```
-Comment for CSS.
-
-```html
-19  <link rel="stylesheet" href="css/styles.css?v=5">
-```
-Links to our CSS file. `?v=5` forces browser to reload new version (cache busting).
-
-```html
-20  </head>
-```
-Closes the head section.
+**Line 20:** `</head>`
+Closes head section.
 
 ---
 
-### Lines 21-30: Body Starts & Loading Screen
+### Body and Loading Screen
 
-```html
-21  <body>
-```
-Starts visible page content.
+**Line 21:** `<body>`
+Opens body section (visible page content starts here).
 
-```html
-22  <!-- Loading Screen -->
-```
+**Line 22:** `<!-- Loading Screen -->`
 Comment.
 
-```html
-23  <div id="loadingScreen" class="loading-screen">
-```
-Container for loading animation.
-- `id="loadingScreen"` = JavaScript can find this
-- `class="loading-screen"` = CSS styles this
+**Line 23:** `<div id="loadingScreen" class="loading-screen">`
+Container for loading animation. `id` for JavaScript, `class` for CSS styling.
 
-```html
-24  <div class="loading-content">
-```
-Inner container for centering spinner and text.
+**Line 24:** `<div class="loading-content">`
+Inner container for centering content.
 
-```html
-25  <div class="loading-spinner"></div>
-```
-Spinning circle (styled with CSS, animated).
+**Line 25:** `<div class="loading-spinner"></div>`
+Spinning circle animation (styled with CSS).
 
-```html
-26  <p class="loading-text">Loading 3D Model...</p>
-```
-Text saying "Loading 3D Model..."
+**Line 26:** `<p class="loading-text">Loading 3D Model...</p>`
+Loading message text.
 
-```html
-27  </div>
-28  </div>
-```
-Closes the two loading divs.
-
-```html
-29  (blank)
-30  <!-- Navigation Header -->
-```
-Comment for header section.
+**Line 27-28:** `</div>` `</div>`
+Closes loading divs.
 
 ---
 
-### Lines 31-40: Header & Logo
+### Header Navigation
 
-```html
-31  <header class="header">
-```
-Semantic header element (tells browsers this is the page header).
+**Line 30:** `<!-- Navigation Header -->`
+Comment.
 
-```html
-32  <nav class="nav-container">
-```
-Navigation container (tells browsers this is navigation).
+**Line 31:** `<header class="header">`
+Semantic header element (tells browser this is page header).
 
-```html
-33  <button class="logo" id="homeLogo" aria-label="Return to home">
-```
-Clickable logo button. Returns to astronaut demo when clicked.
-- `id="homeLogo"` = JavaScript adds click function
-- `aria-label="Return to home"` = tells screen readers what button does
+**Line 32:** `<nav class="nav-container">`
+Navigation container (semantic element for navigation).
 
-```html
-34  <span class="logo-icon">3D</span>
-```
-Shows "3D" text in colored gradient box.
+**Line 33:** `<button class="logo" id="homeLogo" aria-label="Return to home">`
+Clickable logo button. Returns to astronaut demo. `aria-label` helps screen readers.
 
-```html
-35  <span class="logo-text">Model Viewer</span>
-```
-Shows "Model Viewer" text next to icon.
+**Line 34:** `<span class="logo-icon">3D</span>`
+"3D" text in gradient box.
 
-```html
-36  </button>
-```
+**Line 35:** `<span class="logo-text">Model Viewer</span>`
+"Model Viewer" text.
+
+**Line 36:** `</button>`
 Closes logo button.
 
-```html
-37  <div class="nav-links">
-```
+**Line 37:** `<div class="nav-links">`
 Container for navigation buttons.
 
-```html
-38  <button class="nav-btn active" data-section="viewer">Viewer</button>
-```
-Navigation button for Viewer section.
-- `active` = highlighted (current section)
-- `data-section="viewer"` = JavaScript reads this to show correct section
+**Line 38:** `<button class="nav-btn active" data-section="viewer">Viewer</button>`
+Viewer tab button. `active` class highlights current section. `data-section` tells JavaScript which section to show.
 
-```html
-39  <button class="nav-btn" data-section="collection">NASA Collection</button>
-```
-Button to show satellite gallery.
+**Line 39:** `<button class="nav-btn" data-section="collection">NASA Collection</button>`
+Satellite gallery tab button.
 
-```html
-40  <button class="nav-btn" data-section="features">Features</button>
-```
-Button to show features section.
+**Line 40:** `<button class="nav-btn" data-section="features">Features</button>`
+Features tab button.
+
+**Line 41:** `<button class="nav-btn" data-section="about">About</button>`
+About tab button.
+
+**Line 42:** `</div>`
+Closes nav-links div.
+
+**Line 43:** `<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">`
+Dark/light theme switch button.
+
+**Line 44-46:** SVG sun icon (visible in dark mode).
+
+**Line 47-49:** SVG moon icon (visible in light mode).
+
+**Line 50:** `</button>`
+Closes theme toggle.
+
+**Line 51:** `</nav>`
+Closes navigation.
+
+**Line 52:** `</header>`
+Closes header.
 
 ---
 
-### Lines 154-173: 3D Model Viewer Element
+### Model Viewer Section
 
-```html
-154  <model-viewer
-155      id="modelViewer"
-```
-The 3D viewer element. `id="modelViewer"` lets JavaScript change the model.
+**Line 54:** `<!-- Main Content -->`
+Comment.
 
-```html
-156      src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-```
-Which 3D model to show. `.glb` = 3D model file format.
+**Line 55:** `<main class="main-content">`
+Main content area (semantic element).
 
-```html
-157      alt="A 3D model of an astronaut helmet"
-```
+**Line 56:** `<!-- Model Viewer Section -->`
+Comment.
+
+**Line 57:** `<section class="viewer-section active" id="viewerSection">`
+Viewer section. `active` makes it visible initially.
+
+**Line 58:** `<div class="viewer-container">`
+Container splitting screen into info panel (left) and 3D viewer (right).
+
+**Line 59:** `<!-- Model Information Panel -->`
+Comment.
+
+**Line 60:** `<aside class="info-panel">`
+Left sidebar with model information (semantic `<aside>`).
+
+**Line 61:** `<div class="info-content">`
+Container for info panel content.
+
+**Line 62:** `<h1 class="model-title">Astronaut Helmet</h1>`
+Model name (JavaScript updates this when switching models).
+
+**Line 63:** `<p class="model-subtitle">NASA Apollo 11 Mission</p>`
+Model subtitle/category.
+
+**Line 64:** `<!-- Customization Controls -->`
+Comment marking controls section start.
+
+**Line 65:** `<div class="model-description">`
+Description box with border.
+
+**Line 66:** `<p>Experience a highly detailed 3D reconstruction...</p>`
+Model description text.
+
+**Line 67-68:** `</div>` closing tags.
+
+**Line 69:** `<div class="stats-grid">`
+Grid for 3 statistics (Year, Polygons, Materials).
+
+**Line 70:** `<div class="stat-item">`
+First stat box.
+
+**Line 71:** `<span class="stat-value">1969</span>`
+Stat value (large number).
+
+**Line 72:** `<span class="stat-label">Year</span>`
+Stat label (small text below).
+
+**Line 73:** `</div>`
+Closes stat item (pattern repeats for 2 more stats).
+
+**Line 83:** `<!-- Customization Controls -->`
+Comment.
+
+**Line 84:** `<div class="controls-section">`
+Container for all controls.
+
+**Line 85:** `<h3 class="controls-title">Customize View</h3>`
+Controls section heading.
+
+**Line 87:** `<div class="control-group">`
+Container for one control.
+
+**Line 88:** `<label class="control-label">`
+Label wrapping control.
+
+**Line 89:** `<span>Environment</span>`
+Label text.
+
+**Line 90:** `<select id="environmentSelector" class="control-select">`
+Dropdown menu. JavaScript listens to changes.
+
+**Line 91-94:** `<option>` elements for dropdown choices (Neutral, Studio, Warehouse, Outdoor).
+
+**Line 95:** `</select>`
+Closes select.
+
+**Line 96-97:** Closing tags.
+
+**Line 99:** `<div class="control-group">`
+Exposure slider control group.
+
+**Line 100-102:** Exposure range slider. `min="0" max="2" step="0.1" value="1"` sets slider limits.
+
+**Line 106:** `<div class="control-group">`
+Shadow intensity slider group.
+
+**Line 107-109:** Shadow slider (same pattern as exposure).
+
+**Line 113:** `<div class="control-group checkbox-group">`
+Checkbox control group.
+
+**Line 114:** `<label class="checkbox-label">`
+Checkbox label.
+
+**Line 115:** `<input type="checkbox" id="autoRotateToggle" checked>`
+Checkbox input. `checked` means on by default. JavaScript toggles auto-rotate.
+
+**Line 116:** `<span class="checkbox-custom"></span>`
+Custom styled checkbox (hides default browser checkbox).
+
+**Line 117:** `<span>Auto Rotate</span>`
+Checkbox label text.
+
+**Line 118-119:** Closing tags.
+
+**Line 121-127:** Wireframe mode checkbox (same pattern as auto-rotate).
+
+**Line 130:** `<!-- Action Buttons -->`
+Comment.
+
+**Line 131:** `<div class="action-buttons">`
+Button container.
+
+**Line 132:** `<button class="btn btn-primary" id="arButton">`
+AR (Augmented Reality) button. `btn-primary` = purple gradient style.
+
+**Line 133-137:** SVG icon (3D layers).
+
+**Line 138:** `View in AR`
+Button text.
+
+**Line 139:** `</button>`
+Closes AR button.
+
+**Line 140:** `<button class="btn btn-secondary" id="resetCamera">`
+Reset view button. `btn-secondary` = gray style.
+
+**Line 141-144:** SVG icon (circular arrow).
+
+**Line 145:** `Reset View`
+Button text.
+
+**Line 146:** `</button>`
+Closes reset button.
+
+**Line 147-149:** Closing tags for action buttons, info content, info panel.
+
+---
+
+### 3D Model Viewer Element
+
+**Line 151:** `<!-- 3D Model Viewer -->`
+Comment.
+
+**Line 152:** `<div class="model-viewer-wrapper">`
+Container for 3D viewer (right side of screen).
+
+**Line 153:** `<model-viewer`
+Opens model-viewer web component.
+
+**Line 154:** `id="modelViewer"`
+ID for JavaScript to change models.
+
+**Line 155:** `src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"`
+3D model file URL. `.glb` = 3D model format.
+
+**Line 156:** `alt="A 3D model of an astronaut helmet"`
 Description for accessibility (screen readers).
 
-```html
-158      shadow-intensity="1"
-```
-How dark the shadow is (0 = no shadow, 2 = very dark).
+**Line 157:** `shadow-intensity="1"`
+Shadow darkness. 0 = none, 2 = very dark, 1 = normal.
 
-```html
-159      camera-controls
-```
-Let users drag to rotate, scroll to zoom. No value needed (it's a boolean).
+**Line 158:** `camera-controls`
+Enables drag-to-rotate, scroll-to-zoom.
 
-```html
-160      auto-rotate
-```
-Model spins slowly by itself.
+**Line 159:** `auto-rotate`
+Model spins slowly automatically.
 
-```html
-161      ar
-162      ar-modes="webxr scene-viewer quick-look"
-```
-Enable Augmented Reality button.
-- `webxr` = Android AR
-- `quick-look` = iOS AR
+**Line 160:** `ar`
+Enables AR button.
 
-```html
-163      environment-image="neutral"
-```
-Lighting environment. "neutral" = even lighting from all sides.
+**Line 161:** `ar-modes="webxr scene-viewer quick-look"`
+AR methods: webxr (Android), quick-look (iOS).
 
-```html
-164      exposure="1"
-```
-Brightness (0 = dark, 2 = very bright).
+**Line 162:** `environment-image="neutral"`
+Lighting environment. Options: neutral, studio, warehouse, outdoor.
 
-```html
-165      tone-mapping="commerce"
-```
-Color/lighting style optimized for product viewing.
+**Line 163:** `exposure="1"`
+Brightness. 0 = dark, 2 = bright.
 
-```html
-166      camera-orbit="45deg 75deg 105%"
-```
-Camera position:
-- `45deg` = horizontal rotation (like walking around model)
-- `75deg` = vertical angle (0°=top view, 90°=side view)
-- `105%` = distance (105% of model size - adapts to any model!)
+**Line 164:** `tone-mapping="commerce"`
+Color/lighting style optimized for product display.
 
-```html
-167      min-camera-orbit="auto auto 50%"
-168      max-camera-orbit="auto auto 300%"
-```
-Zoom limits:
-- Can zoom IN to 50% (get closer)
-- Can zoom OUT to 300% (move farther)
-- `auto` = allow full rotation
+**Line 165:** `camera-orbit="45deg 75deg 105%"`
+Camera position: 45° horizontal rotation, 75° vertical angle, 105% distance from model.
 
-```html
-169      camera-target="auto auto auto"
-```
-Where camera looks. `auto` = center of model.
+**Line 166:** `min-camera-orbit="auto auto 50%"`
+Minimum zoom: can get as close as 50% distance. `auto` = allow full rotation.
 
-```html
-170      field-of-view="35deg"
-```
-Camera zoom level. Like camera lens (35° = normal view).
+**Line 167:** `max-camera-orbit="auto auto 300%"`
+Maximum zoom: can zoom out to 300% distance.
 
-```html
-171      interaction-prompt="auto"
-```
-Shows hint to "drag to rotate" for a few seconds.
+**Line 168:** `camera-target="auto auto auto"`
+Camera looks at model center. `auto` = automatically centers.
 
-```html
-172      loading="eager"
-```
-Start loading model immediately (don't wait).
+**Line 169:** `field-of-view="35deg"`
+Camera lens angle. 35° = normal view (not fisheye, not telephoto).
 
-```html
-173  >
-```
+**Line 170:** `interaction-prompt="auto"`
+Shows "drag to rotate" hint briefly.
+
+**Line 171:** `loading="eager"`
+Start loading model immediately.
+
+**Line 172:** `>`
 Closes opening tag. Content inside model-viewer comes next.
 
 ---
 
-### Lines 174-197: Hotspots (Interactive Points)
+### Hotspots (Purple Glowing Buttons)
 
-**What are hotspots?** The glowing purple/pink circular buttons you see on the 3D model. When you hover over them, a tooltip appears with information.
+**Line 174:** `<!-- Hotspots -->`
+Comment. **Note:** Hotspots are the purple/pink glowing circles on the model.
 
-```html
-174  <!-- Hotspots -->
-```
-Comment.
-
-```html
-175  <button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">
-```
-Creates a glowing purple button on the 3D model. Shows info tooltip when you hover.
-- `slot="hotspot-1"` = model-viewer special attribute for 3D positioning
-- `data-position="0.5 0.8 0.5"` = XYZ coordinates:
-  - `0.5` = 0.5 meters RIGHT from center
-  - `0.8` = 0.8 meters UP from center
-  - `0.5` = 0.5 meters FORWARD from center
+**Line 175:** `<button class="hotspot" slot="hotspot-1" data-position="0.5 0.8 0.5" data-normal="0 1 0">`
+Creates glowing button on 3D model.
+- `slot="hotspot-1"` = model-viewer positions this in 3D space
+- `data-position="0.5 0.8 0.5"` = XYZ coordinates: 0.5m right, 0.8m up, 0.5m forward
 - `data-normal="0 1 0"` = hotspot faces upward
 
-```html
-176  <div class="hotspot-annotation">
-177      <div class="hotspot-content">
-```
-Container for tooltip that appears on hover.
+**Line 176:** `<div class="hotspot-annotation">`
+Tooltip container (appears on hover).
 
-```html
-178  <h4>Visor</h4>
-```
+**Line 177:** `<div class="hotspot-content">`
+Tooltip content wrapper.
+
+**Line 178:** `<h4>Visor</h4>`
 Tooltip title.
 
-```html
-179  <p>Gold-coated visor protects against solar radiation</p>
-```
-Tooltip description text.
+**Line 179:** `<p>Gold-coated visor protects against solar radiation</p>`
+Tooltip description.
 
-```html
-180-182  </div></div></button>
-```
-Closes the tooltip divs and hotspot button.
+**Line 180-182:** Closing tags for tooltip and hotspot button.
 
-**Second Hotspot (lines 183-189):**
-```html
-183  <button class="hotspot" slot="hotspot-2" data-position="-0.3 0.4 0.6" data-normal="-1 0 0">
-```
-Another hotspot at different position:
-- `-0.3` = 0.3 meters LEFT (negative = left)
-- `0.4` = 0.4 meters UP
-- `0.6` = 0.6 meters FORWARD
-- `data-normal="-1 0 0"` = faces left
+**Lines 183-189:** Second hotspot (Communication System) - same pattern, different position `-0.3 0.4 0.6`.
 
-```html
-184-189  (same pattern as first hotspot)
-```
-Tooltip showing "Communication System" information.
+**Lines 190-197:** Third hotspot (Life Support Connection) - position `0 0.2 0.8`.
 
-**Third Hotspot (lines 190-197):**
-```html
-190  <button class="hotspot" slot="hotspot-3" data-position="0 0.2 0.8" data-normal="0 0 1">
-```
-Third hotspot:
-- `0` = centered left-right
-- `0.2` = slightly up
-- `0.8` = far forward
-- `data-normal="0 0 1"` = faces forward
+**Note:** When you click a satellite, JavaScript removes these hotspots (they only apply to astronaut helmet).
 
 ---
 
-### Lines 200-202: Loading Progress Bar
+### Progress Bar and AR Prompt
 
-```html
-200  <div class="progress-bar" slot="progress-bar">
-201      <div class="update-bar"></div>
-202  </div>
-```
-Loading bar shown while model loads.
-- Outer div = container
-- Inner `update-bar` = fills from 0% to 100% width as model loads
+**Line 199:** `<!-- Loading Progress Bar -->`
+Comment.
+
+**Line 200:** `<div class="progress-bar" slot="progress-bar">`
+Loading bar container. `slot` tells model-viewer to position this.
+
+**Line 201:** `<div class="update-bar"></div>`
+Inner bar that fills 0-100% as model loads. JavaScript updates width.
+
+**Line 202:** `</div>`
+Closes progress bar.
+
+**Line 204:** `<!-- AR Prompt -->`
+Comment.
+
+**Line 205:** `<div id="ar-prompt" slot="ar-button">`
+Custom AR button (appears when AR available).
+
+**Line 206:** `<div class="ar-prompt-content">`
+AR button content wrapper.
+
+**Line 207-211:** SVG icon (3D layers).
+
+**Line 212:** `<span>View in your space</span>`
+AR button text.
+
+**Line 213-214:** Closing tags.
+
+**Line 215:** `</model-viewer>`
+Closes model-viewer element.
 
 ---
 
-### Lines 237-249: NASA Collection Gallery
+### Viewer Controls Overlay
 
-```html
-237  <section class="collection-section" id="collectionSection">
-```
-Container for satellite gallery. Hidden initially.
+**Line 217:** `<!-- Viewer Controls Overlay -->`
+Comment.
 
-```html
-238  <div class="collection-container">
-```
-Inner container for max width and centering.
+**Line 218:** `<div class="viewer-controls">`
+Top-right corner buttons.
 
-```html
-239  <div class="collection-header">
-240      <h2 class="section-title">NASA Satellite Collection</h2>
-241      <p class="collection-subtitle">Explore our collection of 15 authentic NASA satellite 3D models</p>
-242  </div>
-```
-Title and description for gallery.
+**Line 219:** `<button class="control-btn" id="fullscreenBtn" aria-label="Toggle fullscreen">`
+Fullscreen button.
 
-```html
-243  (blank)
-244  <div class="satellite-grid" id="satelliteGrid">
-```
-Grid container for satellite cards. Empty - JavaScript fills this with 15 cards.
+**Line 220-223:** SVG icon (four corner brackets).
 
-```html
-245      <!-- Satellite cards will be dynamically generated by JavaScript -->
-```
-Comment explaining why it's empty.
+**Line 224:** `</button>`
+Closes fullscreen button.
 
-```html
-246  </div>
-247  </div>
-248  </section>
-```
-Closes all the collection divs.
+**Line 225:** `<button class="control-btn" id="screenshotBtn" aria-label="Take screenshot">`
+Screenshot button.
+
+**Line 226-230:** SVG icon (camera).
+
+**Line 231:** `</button>`
+Closes screenshot button.
+
+**Line 232:** `</div>`
+Closes viewer controls.
+
+**Line 233:** `</div>`
+Closes model-viewer-wrapper.
+
+**Line 234:** `</div>`
+Closes viewer-container.
+
+**Line 235:** `</section>`
+Closes viewer section.
+
+---
+
+### NASA Collection Section
+
+**Line 237:** `<!-- NASA Collection Section -->`
+Comment.
+
+**Line 238:** `<section class="collection-section" id="collectionSection">`
+Satellite gallery section (hidden initially).
+
+**Line 239:** `<div class="collection-container">`
+Container for max-width and centering.
+
+**Line 240:** `<div class="collection-header">`
+Header area.
+
+**Line 241:** `<h2 class="section-title">NASA Satellite Collection</h2>`
+Gallery title.
+
+**Line 242:** `<p class="collection-subtitle">Explore our collection of 15 authentic NASA satellite 3D models</p>`
+Gallery subtitle.
+
+**Line 243:** `</div>`
+Closes header.
+
+**Line 245:** `<div class="satellite-grid" id="satelliteGrid">`
+Grid container for satellite cards. **Empty - JavaScript fills this with 15 cards.**
+
+**Line 246:** `<!-- Satellite cards will be dynamically generated by JavaScript -->`
+Comment explaining why empty.
+
+**Line 247:** `</div>`
+Closes satellite grid.
+
+**Line 248:** `</div>`
+Closes collection container.
+
+**Line 249:** `</section>`
+Closes collection section.
+
+---
+
+### Features and About Sections
+
+**Line 251:** `<!-- Features Section -->`
+Features section (4 feature cards).
+
+**Line 265:** `<!-- About Section -->`
+About section (project information).
+
+---
+
+### Footer
+
+**Line 277:** `<!-- Footer -->`
+Comment.
+
+**Line 278:** `<footer class="footer">`
+Page footer.
+
+**Line 279:** `<div class="footer-content">`
+Footer content wrapper.
+
+**Line 280:** `<p>&copy; 2025 3D Model Viewer. Built with modern web technologies.</p>`
+Copyright text. `&copy;` = © symbol.
+
+**Line 281-283:** Closing tags.
+
+**Line 285:** `<!-- JavaScript -->`
+Comment.
+
+**Line 286:** `<script src="js/main.js?v=6"></script>`
+Links JavaScript file. `?v=6` = cache busting.
+
+**Line 287:** `</body>`
+Closes body.
+
+**Line 288:** `</html>`
+Closes HTML document.
 
 ---
 
 ## styles.css - Key Concepts
 
-### CSS Variables (Lines 10-50)
-
+**Lines 10-50:** CSS Variables (Design System)
 ```css
 :root {
     --color-bg-primary: #0a0a0f;
-    --spacing-md: 1rem;
 }
 ```
-**What:** Define reusable values.
-**Why:** Change color once, updates everywhere.
-**Use:** `color: var(--color-bg-primary);`
+Defines reusable colors, spacing, fonts. Use with `var(--color-bg-primary)`. Change once, updates everywhere.
 
-### Flexbox (Lines 195-202)
+**Lines 181-193:** Header with Glassmorphism
+```css
+.header {
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(16px);
+}
+```
+Creates frosted glass effect. Semi-transparent background with blur.
 
+**Lines 195-202:** Flexbox Navigation
 ```css
 .nav-container {
     display: flex;
@@ -452,149 +570,122 @@ Closes all the collection divs.
     justify-content: space-between;
 }
 ```
-**What:** Flexible row layout.
-- `flex` = arrange children in a row
-- `align-items: center` = center vertically
-- `justify-content: space-between` = spread across width
+Flexible layout. Centers items vertically, spreads items horizontally.
 
-### Grid (Lines 844-849)
-
+**Lines 844-849:** Responsive Grid
 ```css
 .satellite-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
 }
 ```
-**What:** Responsive grid layout.
-**How:** Creates as many 320px-wide columns as fit. Automatically wraps to fewer columns on smaller screens.
+Creates columns that automatically adjust to screen size. Minimum 320px per column.
 
-### Transitions (Lines 214-222)
-
+**Lines 214-227:** Hover Animations
 ```css
-.logo {
-    transition: all 150ms;
-}
 .logo:hover {
     transform: scale(1.02);
+    transition: all 150ms;
 }
 ```
-**What:** Smooth animation on hover.
-**How:** When you hover, logo grows to 102% size over 150 milliseconds.
+Smooth size change on hover over 150 milliseconds.
 
 ---
 
 ## main.js - Key Concepts
 
-### Satellite Database (Lines 14-165)
-
+**Lines 14-165:** Satellite Database
 ```javascript
 const SATELLITE_DATABASE = [
     {
         id: 'chandra',
         name: 'Chandra X-ray Observatory',
-        file: 'assets/glb/Chandra X-ray Observatory.glb',
-        tags: ['X-Ray', 'Observatory']
-    },
-    // ... 14 more satellites
+        file: 'assets/glb/Chandra X-ray Observatory.glb'
+    }
 ];
 ```
-**What:** Array of objects storing all satellite info.
-**Why:** Easy to add/remove satellites. One place for all data.
+Array of 15 objects storing all satellite information. Easy to add/remove satellites.
 
-### Event Listeners (Lines 337-340)
-
+**Lines 337-340:** Event Listener
 ```javascript
 homeLogo.addEventListener('click', () => {
     resetToHomeModel(modelViewer, elements);
 });
 ```
-**What:** Run function when logo clicked.
-**How:**
-- `addEventListener` = attach function to event
-- `'click'` = type of event
-- `() => {}` = function to run
+Runs function when logo clicked. `addEventListener` attaches function to click event.
 
-### Creating Elements (Lines 451-480)
-
+**Lines 451-480:** Dynamic HTML Creation
 ```javascript
-function createSatelliteCard(satellite) {
-    const card = document.createElement('div');
-    card.innerHTML = `
-        <h3>${satellite.name}</h3>
-    `;
-    return card;
-}
+const card = document.createElement('div');
+card.innerHTML = `<h3>${satellite.name}</h3>`;
 ```
-**What:** Create HTML from JavaScript.
-**How:**
-- `createElement('div')` = make new div
-- `innerHTML = '...'` = set HTML content
-- \`${variable}\` = insert JavaScript value into string
+Creates HTML elements from JavaScript. Template literals `${}` insert variables.
 
-### Changing Models (Lines 505-526)
+**Lines 505-508:** Remove Hotspots
+```javascript
+const oldHotspots = modelViewer.querySelectorAll('.hotspot');
+oldHotspots.forEach(hotspot => hotspot.remove());
+```
+Finds all hotspot buttons and removes them before loading new satellite model.
 
+**Lines 509-511:** Change Model
 ```javascript
 modelViewer.src = satellite.file;
 modelViewer.cameraOrbit = '45deg 75deg 105%';
 ```
-**What:** Load different 3D model.
-**How:** Change `src` property, model-viewer reloads new model automatically.
+Changes which 3D model displays. model-viewer reloads automatically.
 
 ---
 
 ## Quick Reference
 
-### Important Attributes
-
-**model-viewer:**
-- `src` = which 3D model file
-- `camera-orbit` = camera position (horizontal, vertical, distance)
-- `camera-controls` = let user interact
+**model-viewer attributes:**
+- `src` = 3D model file path
+- `camera-orbit` = position (horizontal, vertical, distance)
+- `camera-controls` = enable drag/zoom
 - `auto-rotate` = spin automatically
+- `ar` = enable AR button
 
-**Hotspots (Purple glowing buttons on model):**
-- `slot="hotspot-X"` = tells model-viewer this is a 3D annotation
+**Hotspot attributes:**
+- `slot="hotspot-X"` = 3D positioning system
 - `data-position="X Y Z"` = 3D coordinates (right/left, up/down, forward/back)
 - `data-normal="X Y Z"` = which direction hotspot faces
-- **Visual:** Purple/pink glowing circle with pulsing animation
-- **Interaction:** Hover to see tooltip with information
+- **Visual:** Purple/pink glowing circle
+- **Only on astronaut helmet** (removed for satellites)
 
-**Common HTML:**
+**HTML:**
 - `id="name"` = unique identifier (JavaScript uses)
-- `class="name"` = styling (CSS uses)
-- `aria-label="text"` = accessibility (screen readers read)
+- `class="name"` = styling hook (CSS uses)
+- `aria-label="text"` = accessibility description
 
-**Common CSS:**
+**CSS:**
 - `display: flex` = flexible row layout
 - `display: grid` = grid layout
-- `transition: all 150ms` = animate changes smoothly
-- `var(--variable)` = use CSS variable value
+- `var(--variable)` = use CSS variable
+- `transition: all 150ms` = smooth animation
 
-**Common JavaScript:**
-- `const` = variable that won't change
+**JavaScript:**
+- `const` = constant variable (can't reassign)
 - `document.getElementById('id')` = find element
-- `element.addEventListener('click', function)` = run function on click
-- \`text ${variable}\` = combine text and variables
+- `element.addEventListener('click', fn)` = run function on click
+- \`text ${variable}\` = template literal (insert variables in strings)
 
 ---
 
 ## Summary
 
-**HTML** = Structure (what elements exist)
-**CSS** = Style (how things look)
-**JavaScript** = Behavior (what happens when you click)
-
-**model-viewer** = Pre-built component that handles all 3D rendering for us
+**HTML** = Structure (elements and content)
+**CSS** = Style (colors, layout, animations)
+**JavaScript** = Behavior (interactive features)
 
 **You built:**
 1. Professional navigation with clickable logo
-2. 3D model viewer with camera controls
-3. Interactive hotspots on models
+2. 3D viewer with camera controls
+3. Hotspots on astronaut (removed for satellites)
 4. Gallery of 15 NASA satellites
-5. Click any satellite to view it
-6. Responsive design (works on phones/tablets/desktop)
+5. Click satellites to view them
+6. Responsive design (all devices)
 7. Dark/light theme toggle
-8. AR support for mobile devices
+8. AR support
 
-**Every line serves a purpose. No "vibe code" - all professional, understandable code!**
+**Professional code - no "vibe coding"!**

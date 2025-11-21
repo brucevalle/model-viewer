@@ -355,7 +355,7 @@ section.active {
 
 .viewer-container {
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 460px 1fr;
     height: 100%;
     gap: 0;
 }
@@ -862,7 +862,7 @@ model-viewer {
 
 @media (max-width: 1024px) {
     .viewer-container {
-        grid-template-columns: 350px 1fr;
+        grid-template-columns: 400px 1fr;
     }
 
     .info-content {

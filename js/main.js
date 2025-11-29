@@ -27,6 +27,7 @@ function initializeApp() {
     initializeControls(elements);
     initializeLoadingScreen(elements);
     setupEventListeners(elements);
+    initializeScrollRotation(elements);
 }
 
 /**
@@ -265,6 +266,63 @@ function updateArButtonState(elements) {
     } else {
         elements.arButton.title = 'View this model in AR';
     }
+}
+
+// ========================================
+// SCROLL-BASED ROTATION
+// ========================================
+
+/**
+ * Initialize scroll-based 3D model rotation
+ * The model rotates as the user scrolls down the page
+ */
+function initializeScrollRotation(elements) {
+    const modelViewer = elements.modelViewer;
+    const heroSection = document.getElementById('heroSection');
+    const viewerSection = document.getElementById('viewerSection');
+
+    // Only enable scroll rotation when auto-rotate is disabled
+    let scrollRotationEnabled = true;
+
+    // Track scroll position and rotate model
+    window.addEventListener('scroll', () => {
+        if (!scrollRotationEnabled) return;
+
+        // Calculate scroll progress (0 to 1)
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollProgress = Math.min(scrollTop / docHeight, 1);
+
+        // Calculate rotation based on scroll (0 to 360 degrees)
+        const rotationAngle = scrollProgress * 360;
+
+        // Update model-viewer camera orbit
+        // Format: "theta phi radius" where theta is horizontal rotation
+        const baseTheta = 45; // Starting angle
+        const newTheta = baseTheta + rotationAngle;
+
+        modelViewer.cameraOrbit = `${newTheta}deg 75deg 120%`;
+    });
+
+    // Disable scroll rotation when auto-rotate is enabled
+    elements.autoRotateToggle.addEventListener('change', (e) => {
+        scrollRotationEnabled = !e.target.checked;
+        if (scrollRotationEnabled) {
+            console.log('📜 Scroll rotation enabled');
+        } else {
+            console.log('🔄 Auto-rotate enabled, scroll rotation disabled');
+        }
+    });
+
+    // Smooth scroll to viewer section when clicking scroll indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            viewerSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    console.log('📜 Scroll-based rotation initialized');
 }
 
 console.log('✅ 3D Model Viewer initialized successfully');

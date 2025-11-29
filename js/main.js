@@ -156,21 +156,34 @@ function initializeControls(elements) {
 // ========================================
 
 function setupEventListeners(elements) {
-    // AR Button
+    // AR Button - trigger model-viewer's built-in AR
     elements.arButton.addEventListener('click', () => {
+        // Try to activate AR through model-viewer
         if (elements.modelViewer.canActivateAR) {
             elements.modelViewer.activateAR();
         } else {
-            alert('AR not supported on this device');
+            // Fallback: try clicking the internal AR button
+            const internalArButton = elements.modelViewer.shadowRoot?.querySelector('button[slot="ar-button"]');
+            if (internalArButton) {
+                internalArButton.click();
+            } else {
+                alert('AR is not supported on this device. Please try on a mobile device with AR capabilities (iOS Safari or Android Chrome).');
+            }
         }
     });
 
-    // Check if AR is supported
-    if (!elements.modelViewer.canActivateAR) {
-        elements.arButton.disabled = true;
-        elements.arButton.style.opacity = '0.5';
-        elements.arButton.title = 'AR not supported on this device';
-    }
+    // Wait for model-viewer to be ready before checking AR support
+    elements.modelViewer.addEventListener('load', () => {
+        updateArButtonState(elements);
+    });
+
+    // Also check AR status changes
+    elements.modelViewer.addEventListener('ar-status', (event) => {
+        console.log('AR Status:', event.detail.status);
+    });
+
+    // Initial check (delayed to allow model-viewer to initialize)
+    setTimeout(() => updateArButtonState(elements), 100);
 
     // Reset Camera Button
     elements.resetCamera.addEventListener('click', () => {
@@ -237,6 +250,21 @@ function hideLoadingScreen(elements) {
     setTimeout(() => {
         loadingScreen.style.display = 'none';
     }, 300);
+}
+
+/**
+ * Update AR button state based on device capability
+ */
+function updateArButtonState(elements) {
+    const canAR = elements.modelViewer.canActivateAR;
+    console.log('AR Support:', canAR);
+
+    if (!canAR) {
+        elements.arButton.title = 'AR requires a mobile device with AR support';
+        // Don't disable - let users try anyway, model-viewer handles fallbacks
+    } else {
+        elements.arButton.title = 'View this model in AR';
+    }
 }
 
 console.log('✅ 3D Model Viewer initialized successfully');

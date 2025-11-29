@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=6">
+    <link rel="stylesheet" href="css/styles.css?v=8">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -56,11 +56,11 @@
                 <!-- Model Information Panel -->
                 <aside class="info-panel">
                     <div class="info-content">
-                        <h1 class="model-title">Astronaut Helmet</h1>
-                        <p class="model-subtitle">NASA Apollo 11 Mission</p>
+                        <h1 class="model-title">Armstrong Suit</h1>
+                        <p class="model-subtitle">NASA Apollo 11 Mission - 1969</p>
 
                         <div class="model-description">
-                            <p>Experience a highly detailed 3D reconstruction of the iconic Apollo 11 astronaut helmet. Interact with the model, explore its features, and discover the technology that made history.</p>
+                            <p>Explore the iconic spacesuit worn by Neil Armstrong during the historic Apollo 11 mission. This 3D model captures every detail of the suit that made the first moonwalk possible.</p>
                         </div>
 
                         <div class="stats-grid">
@@ -150,13 +150,15 @@
                 <div class="model-viewer-wrapper">
                     <model-viewer
                         id="modelViewer"
-                        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-                        alt="A 3D model of an astronaut helmet"
+                        src="models/armstrong_suit.glb"
+                        ios-src="models/armstrong_suit.usdz"
+                        alt="Traje espacial de Neil Armstrong - Apollo 11"
                         shadow-intensity="1"
                         camera-controls
                         auto-rotate
                         ar
                         ar-modes="webxr scene-viewer quick-look"
+                        ar-scale="auto"
                         environment-image="neutral"
                         exposure="1"
                         tone-mapping="commerce"
@@ -242,6 +244,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js?v=6"></script>
+    <script src="js/main.js?v=8"></script>
 </body>
 </html>

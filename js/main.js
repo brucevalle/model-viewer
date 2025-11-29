@@ -117,9 +117,6 @@ function initializeControls(elements) {
         outdoor: 'aircraft_workshop_01_1k.hdr'
     };
 
-    // Set default to Studio
-    elements.modelViewer.environmentImage = environments['studio'];
-
     elements.environmentSelector.addEventListener('change', (e) => {
         const selectedEnvironment = e.target.value;
         elements.modelViewer.environmentImage = environments[selectedEnvironment];

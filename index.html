@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css?v=11">
+    <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -86,8 +86,8 @@
                                 <label class="control-label">
                                     <span>Environment</span>
                                     <select id="environmentSelector" class="control-select">
-                                        <option value="neutral">Neutral</option>
-                                        <option value="studio" selected>Studio</option>
+                                        <option value="neutral" selected>Neutral</option>
+                                        <option value="studio">Studio</option>
                                         <option value="warehouse">Warehouse</option>
                                         <option value="outdoor">Outdoor</option>
                                     </select>
@@ -97,14 +97,14 @@
                             <div class="control-group">
                                 <label class="control-label">
                                     <span>Exposure</span>
-                                    <input type="range" id="exposureSlider" class="control-slider" min="0" max="2" step="0.1" value="1.2">
+                                    <input type="range" id="exposureSlider" class="control-slider" min="0" max="2" step="0.1" value="0.8">
                                 </label>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">
                                     <span>Shadow Intensity</span>
-                                    <input type="range" id="shadowSlider" class="control-slider" min="0" max="2" step="0.1" value="0.5">
+                                    <input type="range" id="shadowSlider" class="control-slider" min="0" max="2" step="0.1" value="1">
                                 </label>
                             </div>
 
@@ -153,14 +153,14 @@
                         src="models/armstrong_suit.glb"
                         ios-src="models/armstrong_suit.usdz"
                         alt="Traje espacial de Neil Armstrong - Apollo 11"
-                        shadow-intensity="0.5"
+                        shadow-intensity="1"
                         camera-controls
                         auto-rotate
                         ar
                         ar-modes="webxr scene-viewer quick-look"
                         ar-scale="auto"
-                        environment-image="legacy"
-                        exposure="1.2"
+                        environment-image="neutral"
+                        exposure="0.8"
                         tone-mapping="commerce"
                         camera-orbit="45deg 75deg 120%"
                         min-camera-orbit="auto auto 50%"
@@ -244,6 +244,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/main.js?v=11"></script>
+    <script src="js/main.js?v=12"></script>
 </body>
 </html>
